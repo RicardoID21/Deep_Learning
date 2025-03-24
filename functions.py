@@ -1,7 +1,13 @@
 import numpy as np
 import pandas as pd
 
-def backtesting(capital, t_profit, t_losses, n_shares, data, params):
+#RSI, MEDIA MOVIL, ICHIMOKUO
+
+
+
+def backtesting(capital, t_profit=0.10, t_losses=0.20, n_shares, data, params):
+    param1, param2, param3 = params
+
 
     # Para posiciones largas
     target_value = long_position * (1+t_profit)
@@ -15,8 +21,13 @@ def backtesting(capital, t_profit, t_losses, n_shares, data, params):
     transacciones = []
 
     for i in data:
+        #Validar SEÑAL AQUI MUEVELE RICHIE, HUGO
+        if FIBONACHI >= 30: # FIBONACHI ES DE GAYS
+            active_position = {'Date': data.index,
+        '   Precio': data[i]}
+
         #Validar si existe una posicion abierta
-        if len(active_position) >= 0:
+        if len(active_position) > 0:
             #LONGS
             long_position = n_shares * data[i]
 
