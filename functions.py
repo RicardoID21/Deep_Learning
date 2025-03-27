@@ -52,6 +52,7 @@ def objective_func(trial, data):
     bb_window = trial.suggest_int('bb_window', 10, 40)
     bb_dev = trial.suggest_float('bb_dev', 1.5, 3.5)
     sma_optimo = trial.suggest_int('sma_window', 9, 30)
+
     stop_loss = trial.suggest_float('stop_loss', 0.01, 0.2)
     take_profit = trial.suggest_float('take_profit', 0.01, 0.2)
     n_shares = trial.suggest_categorical('n_shares', [4000, 4500, 5000, 5500, 6000, 6500, 7000])
@@ -74,6 +75,8 @@ def objective_func(trial, data):
     data['BB_Signal'] = 0
     data.loc[data['Close'] < data['BB_lower'], 'BB_Signal'] = 1
     data.loc[data['Close'] > data['BB_upper'], 'BB_Signal'] = -1
+
+
     data['SMA_Signal'] = data.apply(
         lambda row: 1 if row['Close'] > row['SMA_20'] and data['Close'].shift(1)[row.name] < data['SMA_20'].shift(1)[row.name]
         else (-1 if row['Close'] < row['SMA_20'] and data['Close'].shift(1)[row.name] > data['SMA_20'].shift(1)[row.name] else 0),

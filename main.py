@@ -25,7 +25,7 @@ study = optuna.create_study(direction="maximize")
 study.optimize(wrapped_objective, n_trials=50)
 
 # Mostrar resultados finales
-print("\n🔍 Mejor Sharpe:", round(study.best_value, 4))
+print("\n🔍 Mejor Sharpe:", round(study.best_value * np.sqrt(19656), 4))
 print("⚙️  Mejores parámetros:", study.best_params)
 
 # Extraer métricas del mejor resultado
